@@ -1,0 +1,12 @@
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/bin/Debug/net8.0/DatabaseService.deps.json
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/bin/Debug/net8.0/DatabaseService.dll
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/bin/Debug/net8.0/DatabaseService.pdb
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/DatabaseService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/DatabaseService.AssemblyInfoInputs.cache
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/DatabaseService.AssemblyInfo.cs
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/DatabaseService.csproj.CoreCompileInputs.cache
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/DatabaseService.dll
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/refint/DatabaseService.dll
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/DatabaseService.pdb
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/ref/DatabaseService.dll
+/Users/noahclemmensen/RiderProjects/PostSyd/DatabaseService/obj/Debug/net8.0/DatabaseService.csproj.AssemblyReference.cache

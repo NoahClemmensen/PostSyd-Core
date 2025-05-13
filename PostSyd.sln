@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC-App", "MVC-App\MVC-App.csproj", "{8CDD1918-E733-4358-8168-63179F331ACD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{85BFA5A6-35AE-438A-8F7A-EECCF090B539}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseService", "DatabaseService\DatabaseService.csproj", "{8AD16E53-8EF1-40F5-8904-288B4A64A07D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CDD1918-E733-4358-8168-63179F331ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CDD1918-E733-4358-8168-63179F331ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CDD1918-E733-4358-8168-63179F331ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CDD1918-E733-4358-8168-63179F331ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AD16E53-8EF1-40F5-8904-288B4A64A07D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AD16E53-8EF1-40F5-8904-288B4A64A07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AD16E53-8EF1-40F5-8904-288B4A64A07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AD16E53-8EF1-40F5-8904-288B4A64A07D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
