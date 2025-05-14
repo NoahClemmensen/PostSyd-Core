@@ -4,6 +4,8 @@
 /.idea/.idea.PostSyd/.idea/vcs.xml
 /.idea/.idea.PostSyd/.idea/.gitignore
 
+secrets.json
+
 
 # Default ignored files
 /.idea
