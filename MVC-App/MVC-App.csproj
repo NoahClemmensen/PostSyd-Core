@@ -23,6 +23,15 @@
       <Compile Update="Models\DepartmentMapper.cs">
         <DependentUpon>DepartmentModel.cs</DependentUpon>
       </Compile>
+      <Compile Update="Models\PackageMapper.cs">
+        <DependentUpon>PackageModel.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Models\RouteMapper.cs">
+        <DependentUpon>RouteModel.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Models\ShopMapper.cs">
+        <DependentUpon>ShopModel.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

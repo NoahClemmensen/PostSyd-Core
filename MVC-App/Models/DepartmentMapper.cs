@@ -13,8 +13,8 @@ public class DepartmentMapper : IEntityMapper<DepartmentModel>
             Name = reader.GetString(1),
             PostalCode = reader.GetInt32(2),
             Deleted = reader.GetBoolean(3),
-            CreatedDate = reader.GetDateTime(4),
-            DeletedDate = reader.IsDBNull(5) ? null : reader.GetDateTime(5),
+            CreatedAt = reader.GetDateTime(4),
+            DeletedAt = reader.IsDBNull(5) ? null : reader.GetDateTime(5),
         };
     }
 }
