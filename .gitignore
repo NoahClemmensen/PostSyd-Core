@@ -5,6 +5,7 @@
 /.idea/.idea.PostSyd/.idea/.gitignore
 
 secrets.json
+.env
 
 
 # Default ignored files
