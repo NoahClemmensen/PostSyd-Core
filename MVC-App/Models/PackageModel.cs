@@ -2,7 +2,7 @@ namespace MVC_App.Models;
 
 public class PackageModel
 {
-    public int Id { get; set; }
+    public int PackageId { get; set; }
     public int ShopId { get; set; }
     public int StatusId { get; set; }
     public string SenderName { get; set; }

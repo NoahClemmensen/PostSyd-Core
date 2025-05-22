@@ -15,7 +15,7 @@ public class BrokerConnection
     }
     
     private readonly MqttClientFactory _clientFactory = new MqttClientFactory();
-    internal readonly IMqttClient _client;
+    public readonly IMqttClient _client;
     
     private static BrokerConnection? _instance;
     public static BrokerConnection Instance => _instance ??= new BrokerConnection();
@@ -31,7 +31,7 @@ public class BrokerConnection
         await _messageHandlers[topic].Invoke(topic, payload);
     }
 
-    internal async Task<MqttClientConnectResult?> Connect()
+    public async Task<MqttClientConnectResult?> Connect()
     {
         if (_client.IsConnected) return null;
         
@@ -40,7 +40,7 @@ public class BrokerConnection
             .WithTcpServer(Host, Port)
             .Build();
 
-        var result = await _client.ConnectAsync(mqttClientOptions, CancellationToken.None);
+        var result = await _client.ConnectAsync(mqttClientOptions);
         _client.ApplicationMessageReceivedAsync += OnMessageReceived;
         return result;
     }

@@ -2,17 +2,17 @@ using MySql.Data.MySqlClient;
 
 namespace DatabaseService;
 
-// Repsotiory pattern
-public class Repository<T>(IEntityMapper<T> entityMapper) : IRepository<T>
+// Repository pattern
+public class Repository<T>(IEntityMapper<T> entityMapper, DatabaseConnection dbConnection) : IRepository<T>
 {
-    private readonly DatabaseConnection _dbConnection = DatabaseConnection.Instance;
-
+    protected readonly DatabaseConnection DbConnection = dbConnection;
+    
     public async Task<IEnumerable<T>> ExecuteQueryAsync(IQueryObject queryObject)
     {
         var result = new List<T>();
-        if (!_dbConnection.IsConnected()) return result;
+        if (!DbConnection.IsConnected()) return result;
 
-        await using var command = new MySqlCommand(queryObject.Query, _dbConnection.Connection);
+        await using var command = new MySqlCommand(queryObject.Query, DbConnection.Connection);
         command.Parameters.AddRange(queryObject.Parameters);
 
         await using var reader = await command.ExecuteReaderAsync();

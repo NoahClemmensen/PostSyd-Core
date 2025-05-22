@@ -9,7 +9,7 @@ public class PackageMapper : IEntityMapper<PackageModel>
     {
         return new PackageModel
         {
-            Id = reader.GetInt32(0),
+            PackageId = reader.GetInt32(0),
             ShopId = reader.GetInt32(1),
             StatusId = reader.GetInt32(2),
             SenderName = reader.GetString(3),

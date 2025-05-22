@@ -9,7 +9,7 @@ public class DepartmentMapper : IEntityMapper<DepartmentModel>
     {
         return new DepartmentModel
         {
-            Id = reader.GetInt32(0),
+            DepartmentId = reader.GetInt32(0),
             Name = reader.GetString(1),
             PostalCode = reader.GetInt32(2),
             Deleted = reader.GetBoolean(3),

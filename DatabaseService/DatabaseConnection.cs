@@ -15,12 +15,18 @@ public class DatabaseConnection
     
     private static DatabaseConnection? _instance = null;
     public static DatabaseConnection Instance => _instance ??= new DatabaseConnection();
+    
+    private static DatabaseConnection? _selectInstance = null;
+    public static DatabaseConnection SelectInstance => _selectInstance ??= new DatabaseConnection();
+
+    private static DatabaseConnection? _execInstance = null;
+    public static DatabaseConnection ExecInstance => _execInstance ??= new DatabaseConnection();
 
     internal bool IsConnected()
     {
         if (Connection != null) return true;
         
-        if (String.IsNullOrEmpty(Schema))
+        if (String.IsNullOrEmpty(Server+Schema+User+Password))
             return false;
         var connectionString = $"Server={Server}; database={Schema}; UID={User}; password={Password}";
         Connection = new MySqlConnection(connectionString);

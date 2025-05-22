@@ -1,5 +1,6 @@
 using DatabaseService;
 using MVC_App.Interfaces;
+using MVC_App.Services;
 
 namespace MVC_App;
 
@@ -10,20 +11,27 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         var dbHost = builder.Configuration["Database:Host"];
         var dbSchema = builder.Configuration["Database:Schema"];
-        var dbUser = builder.Configuration["Database:User"];
-        var dbPassword = builder.Configuration["Database:Password"];
+        var selectUser = builder.Configuration["Database:Select:User"];
+        var selectPassword = builder.Configuration["Database:Select:Password"];
+        var execUser = builder.Configuration["Database:Exec:User"];
+        var execPassword = builder.Configuration["Database:Exec:Password"];
         
-        if (dbHost == null || dbSchema == null || dbUser == null || dbPassword == null) 
+        if (dbHost == null || dbSchema == null || selectUser == null || selectPassword == null || execUser == null || execPassword == null) 
         {
             throw new Exception("Database connection details are not configured properly.");
         }
         
         // Configure the database connection
-        DatabaseConnection.Instance.SetConnectionDetails(dbHost, dbSchema, dbUser, dbPassword);
-
+        DatabaseConnection.SelectInstance.SetConnectionDetails(dbHost, dbSchema, selectUser, selectPassword);
+        DatabaseConnection.ExecInstance.SetConnectionDetails(dbHost, dbSchema, execUser, execPassword);
+        
         // Add services to the container.
         builder.Services.AddControllersWithViews();
-        builder.Services.AddScoped<IDatabaseService, Services.DatabaseService>();
+        builder.Services.AddSingleton<IDatabaseService, Services.DatabaseService>();
+        builder.Services.AddSingleton<IPackageRoutingService, PackageRoutingService>();
+        builder.Services.AddSingleton<IMqttService, MqttService>();
+        builder.Services.AddHostedService<MqttHostedService>();
+        builder.Services.AddTransient<OcrMessageProcessor>();
 
         var app = builder.Build();
 
