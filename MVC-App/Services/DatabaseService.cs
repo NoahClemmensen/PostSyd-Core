@@ -152,4 +152,18 @@ public class DatabaseService : IDatabaseService
         var result = await repository.ExecuteQueryAsync(queryObject);
         return result.ToList();
     }
+    
+    public async Task<UserModel?> GetUserByUsername(string username) 
+    {
+        var dataMapper = new UserMapper();
+        var repository = new SelectExecRepository<UserModel>(dataMapper);
+        var queryObject = new GetByColumnQuery("users", username, "username");
+        var result = await repository.ExecuteQueryAsync(queryObject);
+        return result.FirstOrDefault();
+    }
+
+    public async Task CreateUser(string username, string password, int departmentId)
+    {
+        
+    }
 }

@@ -4,12 +4,12 @@ using MVC_App.Interfaces;
 namespace MVC_App.Controllers;
 
 [Route("[controller]")]
-public class PackagesController : Controller
+public class PackagesController : BaseController
 {
     private readonly ILogger<PackagesController> _logger;
     private readonly IDatabaseService _dbService;
 
-    public PackagesController(ILogger<PackagesController> logger, IDatabaseService dbService)
+    public PackagesController(ILogger<PackagesController> logger, IDatabaseService dbService, IAuthService authService) : base(authService)
     {
         _logger = logger;
         _dbService = dbService;

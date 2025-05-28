@@ -6,7 +6,7 @@ using MVC_App.Services;
 
 namespace MVC_App.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller
+public class HomeController(ILogger<HomeController> logger, IAuthService authService) : BaseController(authService)
 {
     private readonly ILogger<HomeController> _logger = logger;
 

@@ -5,12 +5,12 @@ namespace MVC_App.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class RoutesController : Controller
+public class RoutesController : BaseController
 {
     private readonly ILogger<RoutesController> _logger;
     private readonly IDatabaseService _dbService;
 
-    public RoutesController(ILogger<RoutesController> logger, IDatabaseService dbService)
+    public RoutesController(ILogger<RoutesController> logger, IDatabaseService dbService, IAuthService authService) : base(authService)
     {
         _logger = logger;
         _dbService = dbService;

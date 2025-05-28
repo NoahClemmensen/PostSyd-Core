@@ -5,7 +5,7 @@ namespace MVC_App.Services;
 
 public class PackageRoutingService(IDatabaseService databaseService) : IPackageRoutingService
 {
-    private const int UnroutedPackageChuteId = 3;
+    private static readonly ChuteModel UnsortedChute = new();
 
     public async Task<ChuteModel?> GetNextChute(PackageModel package, DepartmentModel currentDepartment)
     {
@@ -14,7 +14,7 @@ public class PackageRoutingService(IDatabaseService databaseService) : IPackageR
             var existingRoute = await FindExistingRoute(package.ShopId, currentDepartment.DepartmentId);
             
             // Send it off to the unrouted chute if no route is found
-            if (existingRoute == null) return await databaseService.GetChuteById(UnroutedPackageChuteId);
+            if (existingRoute == null) return UnsortedChute;
             
             await databaseService.UpdateRouteOnPackage(package.PackageId, existingRoute.RouteId); // Remember to update the package with the new route
             return await GetFirstOrDefaultChuteByRouteId(existingRoute.RouteId);

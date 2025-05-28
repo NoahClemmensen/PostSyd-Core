@@ -14,19 +14,33 @@ public class OcrMessageProcessor(
         try
         {
             var data = JArray.Parse(message);
-            if (!data.AsEnumerable().Any()) return;
+            if (!data.AsEnumerable().Any())
+            {
+                await SendToUnsortedChute(mqttService);
+                return;
+            }
 
             var value = data[0][1]?.ToObject<int>();
             var confidence = data[0][2]!.ToObject<double>();
 
-            if (!(confidence > 0.5) || value == null) return;
+            if (!(confidence > 0.5) || value == null)
+            {
+                await SendToUnsortedChute(mqttService);
+                return;
+            }
 
             var package = await databaseService.GetPackageById((int)value);
-            if (package == null) return;
+            if (package == null) {
+                await SendToUnsortedChute(mqttService);
+                return;
+            }
 
             var department = await databaseService.GetDepartmentById(2);
             var destinationChute = await routingService.GetNextChute(package, department!);
-            if (destinationChute == null) return;
+            if (destinationChute == null) {
+                await SendToUnsortedChute(mqttService);
+                return;
+            }
 
             logger.LogInformation("Publishing to sorter/chute: {ChuteId}", destinationChute.ChuteId);
             await mqttService.Publish("sorter/chute", destinationChute.ChuteId.ToString());
@@ -35,5 +49,10 @@ public class OcrMessageProcessor(
         {
             logger.LogError($"Error processing message: {e.Message}");
         }
+    }
+    
+    private async Task SendToUnsortedChute(IMqttService mqttService)
+    {
+        await mqttService.Publish("sorter/chute", 0.ToString());
     }
 }

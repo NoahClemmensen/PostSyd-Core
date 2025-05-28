@@ -1,4 +1,5 @@
 using DatabaseService;
+using MVC_App.Filters;
 using MVC_App.Interfaces;
 using MVC_App.Services;
 
@@ -15,16 +16,21 @@ public class Program
         var selectPassword = builder.Configuration["Database:Select:Password"];
         var execUser = builder.Configuration["Database:Exec:User"];
         var execPassword = builder.Configuration["Database:Exec:Password"];
-        
-        if (dbHost == null || dbSchema == null || selectUser == null || selectPassword == null || execUser == null || execPassword == null) 
+
+        var jwtSecret = builder.Configuration["Jwt:Secret"];
+        var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+        var jwtAudience = builder.Configuration["Jwt:Audience"];
+
+        if (dbHost == null || dbSchema == null || selectUser == null || selectPassword == null || execUser == null ||
+            execPassword == null || jwtSecret == null || jwtIssuer == null || jwtAudience == null)
         {
-            throw new Exception("Database connection details are not configured properly.");
+            throw new Exception("secrets.json connection details are not configured properly.");
         }
-        
+
         // Configure the database connection
         DatabaseConnection.SelectInstance.SetConnectionDetails(dbHost, dbSchema, selectUser, selectPassword);
         DatabaseConnection.ExecInstance.SetConnectionDetails(dbHost, dbSchema, execUser, execPassword);
-        
+
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddSingleton<IDatabaseService, Services.DatabaseService>();
@@ -32,6 +38,15 @@ public class Program
         builder.Services.AddSingleton<IMqttService, MqttService>();
         builder.Services.AddHostedService<MqttHostedService>();
         builder.Services.AddTransient<OcrMessageProcessor>();
+        builder.Services.AddSingleton<IUserService, UserService>();
+        builder.Services.AddTransient<IAuthService>(provider =>
+        {
+            var databaseService = provider.GetService<IDatabaseService>();
+            return new AuthService(jwtSecret, jwtIssuer, jwtAudience, databaseService);
+        });
+
+        // Register filters
+        builder.Services.AddControllersWithViews(options => { options.Filters.Add<UserMetadataFilter>(); });
 
         var app = builder.Build();
 

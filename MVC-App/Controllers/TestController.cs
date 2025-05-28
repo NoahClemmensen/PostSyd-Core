@@ -7,7 +7,7 @@ namespace MVC_App.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TestController(ILogger<TestController> logger, IDatabaseService dbService) : Controller
+public class TestController(ILogger<TestController> logger, IDatabaseService dbService, IAuthService authService) : BaseController(authService)
 {
     public IActionResult Index()
     {

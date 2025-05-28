@@ -24,4 +24,7 @@ public interface IDatabaseService
     
     Task<ChuteModel?> GetChuteById(int id);
     Task<IEnumerable<ChuteModel>> GetChuteByRouteId(int id);
+    
+    Task<UserModel?> GetUserByUsername(string username);
+    Task CreateUser(string username, string password, int departmentId);
 }
