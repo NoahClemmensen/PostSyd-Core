@@ -11,13 +11,13 @@ public class UserService(IDatabaseService databaseService, ILogger<IUserService>
         var user = await databaseService.GetUserByUsername(username);
         if (user == null)
         {
-            logger.LogError($"User {username} not found");
+            logger.LogError("User {Username} not found", username);
             return null;
         }
         
         if (user.DepartmentId == null)
         {
-            logger.LogError($"User {username} has no department ID");
+            logger.LogError("User {Username} has no department ID", username);
             return null;
         }
 
@@ -29,7 +29,7 @@ public class UserService(IDatabaseService databaseService, ILogger<IUserService>
                 Terminal = department.Name
             };
         
-        logger.LogError($"Department not found for user {username}");
+        logger.LogError("Department not found for user {Username}", username);
         return null;
     }
 
@@ -45,7 +45,7 @@ public class UserService(IDatabaseService databaseService, ILogger<IUserService>
                 }
             }
         } catch (Exception e) {
-            logger.LogError(e, "Error checking if user is logged in");
+            logger.LogError(e, "Error checking if user is logged in: {Message}", e.Message);
         }
 
         return false;

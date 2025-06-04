@@ -5,8 +5,8 @@ namespace DatabaseService;
 // Repository pattern
 public class Repository<T>(IEntityMapper<T> entityMapper, DatabaseConnection dbConnection) : IRepository<T>
 {
-    protected readonly DatabaseConnection DbConnection = dbConnection;
-    
+    private readonly DatabaseConnection DbConnection = dbConnection;
+
     public async Task<IEnumerable<T>> ExecuteQueryAsync(IQueryObject queryObject)
     {
         var result = new List<T>();
@@ -20,6 +20,7 @@ public class Repository<T>(IEntityMapper<T> entityMapper, DatabaseConnection dbC
         {
             result.Add(entityMapper.MapFromReader(reader));
         }
+
         return result;
     }
 }

@@ -164,6 +164,16 @@ public class DatabaseService : IDatabaseService
 
     public async Task CreateUser(string username, string password, int departmentId)
     {
-        
+        var dataMapper = new UserMapper();
+        var repository = new SelectExecRepository<UserModel>(dataMapper);
+        var queryObject = new ExecuteProcedureQuery(
+            "create_user",
+            [
+                new MySqlParameter("@in_username", username),
+                new MySqlParameter("@in_password", password),
+                new MySqlParameter("@in_department_id", departmentId)
+            ]
+        );
+        await repository.ExecuteProcedureAsync(queryObject);
     }
 }

@@ -13,10 +13,15 @@ public class AuthController(ILogger<AuthController> logger, IAuthService authSer
         return View();
     }
     
-    [HttpPost]
+    [HttpGet]
     [Route("Login")]
     public async Task<IActionResult> Login(string username, string password)
     {
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            return BadRequest("Username and password are required.");
+        }
+
         var token = await authService.Authenticate(username, password);
         if (token == null)
         {
